@@ -29,26 +29,28 @@ export class OrderService {
     // filter outstanding ,sort price DESC
     buy = buy.map( item => item).filter(item => item.outstanding > 0).sort((a, b ) => (b.price - a.price) * 10 + (a.id > b.id ? 1 : -1));
     // filter outstanding ,sort price ASC
-    sell = sell.map( item => item).filter(item => item.outstanding > 0).sort((a , b) => (a.price - b.price) * 10 + (a.id > b.id ? 1 : -1))
+    sell = sell.map( item => item).filter(item => item.outstanding > 0).sort((a , b) => (a.price - b.price) * 10 + (a.id > b.id ? 1 : -1));
 
     const sellNum = sell.length;
     const buyNum = buy.length;
-
+    // the buy index is defined here to keep track of the last buy order while changing sell orders.
+    let buyIndex = 0;
     sellLoop:
       for (let sellIndex = 0; sellIndex < sellNum; sellIndex++) {
         const sellOrder = sell[sellIndex];
-        buyLoop:
-          for (let buyIndex = 0; buyIndex < buyNum; buyIndex++) {
+          for (; buyIndex < buyNum; buyIndex++) {
             const buyOrder = buy[buyIndex];
             // no more possible transactions
             if (buyOrder.price < sellOrder.price) {
               return transactions;
             }
-            if (sellOrder.outstanding === 0) { // go to next sell order
-              continue sellLoop;
-            }
-            if (buyOrder.outstanding === 0) { // go to next buy order
-              continue buyLoop;
+            if (buyOrder.outstanding === 0) {
+              if ( buyIndex + 1 === buyNum) {
+                // last buy outstanding = 0
+                return transactions;
+              }
+              // go to next buy order
+              continue;
             }
             const amount  = Math.min(buyOrder.outstanding , sellOrder.outstanding);
 
@@ -59,7 +61,8 @@ export class OrderService {
             // update orders
             sellOrder.outstanding -= amount;
             buyOrder.outstanding -= amount;
-            if (sellOrder.outstanding === 0) { // go to next sell order
+            // This is the case the last sell completed, but last buy not. go to next sell order
+            if (sellOrder.outstanding === 0) {
               continue sellLoop;
             }
           }
