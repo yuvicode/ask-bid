@@ -1,0 +1,42 @@
+<div class="page-body">
+
+  <div class="table">
+    <span class="title"> Sale orders ({{sellNum | async}})</span>
+
+    <ngx-datatable
+      class="material"
+      [rows]="sellOrders | async"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [rowHeight]="50">
+    </ngx-datatable>
+  </div>
+
+  <div class="table">
+    <span class="title"> Transactions ({{transNum | async}})</span>
+    <ngx-datatable
+      (activate)="transctionSelect($event)"
+      class="material"
+      [rows]="transactions | async"
+      [columns]="transCol"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [rowHeight]="50">
+    </ngx-datatable>
+  </div>
+
+  <div class="table">
+    <span class="title"> Buy orders ({{buyNum | async}})</span>
+
+    <ngx-datatable
+      class="material"
+      [rows]="buyOrders | async"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [rowHeight]="50">
+    </ngx-datatable>
+  </div>
+
+</div>

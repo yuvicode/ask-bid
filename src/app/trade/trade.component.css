@@ -1,0 +1,55 @@
+.page-body{
+  margin:20px;
+  display: flex;
+  width:100%;
+  height: 500px;
+}
+
+.table{
+  height: 300px;
+  width:300px;
+  margin:10px;
+}
+
+::ng-deep  .table .datatable-body-row:hover{
+     background-color: aqua;
+}
+
+::ng-deep  .table .datatable-row-even{
+  background-color: aliceblue;
+}
+
+::ng-deep  .table .datatable-header-cell-wrapper{
+  line-height: 50px;
+  font-weight: 600;
+}
+::ng-deep  .table .datatable-body-cell-label {
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 50px;
+  text-overflow: ellipsis;
+}
+
+::ng-deep  .table .datatable-body-cell{
+  border-right: 1px solid #f6f6f6;
+  padding-left: 10px;
+}
+
+::ng-deep  .table .datatable-row-group {
+  border-left: 1px solid #f6f6f6;
+}
+
+::ng-deep  .table .datatable-header {
+  border-left: 1px solid #f6f6f6;
+  border-top: 1px solid #f6f6f6;
+}
+::ng-deep  .table .datatable-header-cell{
+  border-right: 1px solid #f6f6f6;
+  padding-left: 10px;
+}
+
+
+
+
+
+

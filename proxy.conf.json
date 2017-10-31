@@ -1,0 +1,6 @@
+{
+  "/listOrders": {
+    "target": "http://localhost:5001",
+    "secure": false
+  }
+}

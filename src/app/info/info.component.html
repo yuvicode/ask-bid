@@ -1,0 +1,53 @@
+
+<div class="field">
+  <span class=name>
+    Transaction id:
+  </span>
+  <span class="value">
+  {{transaction.id}}
+  </span>
+</div>
+<div class="field">
+  <span class=name>
+    Time:
+  </span>
+  <span class="value">
+  {{ transaction.timeStamp  |  date:'HH:mm:ss'}}
+  </span>
+</div>
+<div class="field">
+  <span class=name>
+    Price:
+  </span>
+  <span class="value">
+  {{transaction.price}}
+  </span>
+</div>
+<div class="field">
+  <span class=name>
+    Quantity:
+  </span>
+  <span class="value">
+  {{transaction.quantity}}
+  </span>
+</div>
+
+<div class="field">
+  <span class=name>
+    Ask price:
+  </span>
+  <span class="value">
+  {{ask.price}}
+  </span>
+</div>
+
+<div class="field">
+  <span class=name>
+    Bid price:
+  </span>
+  <span class="value">
+  {{bid.price}}
+  </span>
+</div>
+
+
