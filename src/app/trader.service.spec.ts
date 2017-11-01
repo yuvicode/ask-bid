@@ -1,5 +1,5 @@
 import {TestBed, async, inject} from '@angular/core/testing';
-import {OrderService} from './trader.service';
+import { TradingService} from './trader.service';
 import {OutstandingOrder, Transaction} from './app.model';
 import {HttpClientModule} from '@angular/common/http';
 import {NgReduxModule} from '@angular-redux/store';
@@ -8,7 +8,7 @@ import {NgReduxModule} from '@angular-redux/store';
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    providers: [OrderService],
+    providers: [TradingService],
     imports: [
       HttpClientModule,
       NgReduxModule
@@ -16,7 +16,7 @@ beforeEach(() => {
   });
 });
 
-it('testing performTransactions!!!', inject([OrderService], (service: OrderService) => {
+it('testing performTransactions!!!', inject([TradingService], (service: TradingService) => {
   const sell: OutstandingOrder[]  = [{id: 2, type: 'sell', price: 3, quantity: 8, outstanding: 8},
     {id: 1, type: 'sell', price: 3, quantity: 7, outstanding: 7}, {
     id: 7,

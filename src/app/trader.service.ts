@@ -5,14 +5,10 @@ import {APP_ORDERS_LOADED, APP_RESET, APP_TRADING_CYCLE_END,  AppState} from './
 import {OutstandingOrder, Transaction} from './app.model';
 
 @Injectable()
-export class OrderService {
+export class TradingService {
 
   constructor(private http: HttpClient, private ngRedux: NgRedux<AppState>) { }
   init() {
-    let start;
-    this.ngRedux.select('lastOrderIndex').subscribe((index) => {start = index; } );
-    setInterval(() => {this.getOrders(start); }, 3000);
-
     let sell;
     let buy;
     this.ngRedux.select('bidQueue').subscribe((q) => {buy = q; } );
@@ -57,20 +53,4 @@ export class OrderService {
     }
     return transactions;
   }
-  getOrders(start: number) {
-    this.http.get(`/listOrders?start=${start}&size=10`).subscribe(
-      data => {
-        this.ngRedux.dispatch({type: APP_ORDERS_LOADED, payload: data});
-      }
-    );
-  }
-  resetOrders(start: number) {
-    this.http.get(`/reset`).subscribe(
-      data => {
-        this.ngRedux.dispatch({type: APP_RESET, payload: data});
-      }
-    );
-  }
-
-
 }

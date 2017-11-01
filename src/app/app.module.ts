@@ -6,14 +6,16 @@ import {AppState, store} from './app.redux';
 import {RouterModule, Routes} from '@angular/router';
 import { InfoComponent } from './info/info.component';
 import {HttpClientModule} from '@angular/common/http';
-import {OrderService} from './trader.service';
+import {TradingService} from './trader.service';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { PageComponent } from './page/page.component';
+import {RestService} from './rest.service';
 
 
-export function init(config: OrderService) {
+export function init(trader: TradingService, rest: RestService) {
   return () => {
-    config.init();
+    trader.init();
+    rest.init();
   };
 }
 @NgModule({
@@ -43,9 +45,9 @@ export function init(config: OrderService) {
   providers: [{
     'provide': APP_INITIALIZER,
     'useFactory': init,
-    'deps': [OrderService],
+    'deps': [TradingService, RestService],
     'multi': true
-  }, OrderService ],
+  }, TradingService, RestService ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [PageComponent]
 })
